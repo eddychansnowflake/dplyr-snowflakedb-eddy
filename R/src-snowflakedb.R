@@ -274,7 +274,7 @@ db_insert_into.SnowflakeDBConnection <- function(con, table, values, ...) {
   # load the file from the table stage
   # Updated by Eddy Chan (Snowflake SE)
   # sql <- dplyr::build_sql("COPY INTO ", ident(table), " FILE_FORMAT = (FIELD_DELIMITER = '\\t' SKIP_HEADER = 1 NULL_IF = 'NA')")
-  sql <- dplyr::build_sql("COPY INTO ", ident(table), " FILE_FORMAT = (FIELD_DELIMITER = '\\t' SKIP_HEADER = 1 NULL_IF = 'NA' FIELD_OPTIONALLY_ENCLOSED_BY = '\042')")
+  sql <- dplyr::build_sql("COPY INTO ", ident(table), " FILE_FORMAT = (FIELD_DELIMITER = '\\t' SKIP_HEADER = 1 NULL_IF = 'NA' ESCAPE_UNENCLOSED_FIELD = '\\134' FIELD_OPTIONALLY_ENCLOSED_BY = '\042')")
   message(sql)
   rs <- dbGetQuery(con, sql)
   if (rs["errors_seen"] != "0") print(rs)
